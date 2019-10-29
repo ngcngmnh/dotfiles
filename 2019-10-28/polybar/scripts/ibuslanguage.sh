@@ -1,11 +1,10 @@
-#!/bin/bash
+#!/bin/sh
 
 engineibus=$(ibus engine)
-echo "haha";
-if [[ $engineibus == "Bamboo" ]]; then
-    echo "vn";
-#elif [ $engine == "mozc-jp" ]; then
-#    echo "jp";
+
+if [ "$engineibus" == 'Bamboo' ]
+then
+    echo "ﱃ Bamboo"
 else
-    echo "en";
+    echo "ﱃ English"
 fi
