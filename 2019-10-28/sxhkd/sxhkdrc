@@ -127,7 +127,7 @@ super + shift + Return
 
 #DMENU
 super + shift + d
-	dmenu_run -i -nb '#003C3C' -nf '#CFCFCF' -sb '#085F5F' -sf '#d26273' -fn 'iosevka:bold:pixelsize=15'
+	dmenu_run -i -nb '#003C3C' -nf '#CFCFCF' -sb '#085F5F' -sf '#d26273' -fn 'Iosevka Nerd Font Mono:bold:pixelsize=18'
 
 #Reload bspwm
 super + shift + r
@@ -271,8 +271,15 @@ ctrl + shift + Print
 
 
 #########################
-#     MULTIMEDIA KEYS   #
+#     FUNCTION KEYS   #
 #########################
+
+XF86TouchpadToggle
+    ~/.config/sxhkd/scripts/touchpadtoggle.sh
+
+#Fn+F7
+XF86ScreenSaver
+    ~/.config/sxhkd/scripts/monitortoggle.sh
 
 #Raises volume
 XF86AudioRaiseVolume
@@ -292,31 +299,38 @@ XF86AudioMute
 #mpc works for ncmpcpp
 
 #PLAY
-XF86AudioPlay
-    mpc toggle
+#XF86AudioPlay
+#    mpc toggle
     #playerctl play-pause
 
 #Next
-XF86AudioNext
-     mpc next
+#XF86AudioNext
+#     mpc next
      #playerctl next
 
 #previous
-XF86AudioPrev
-    mpc prev
+#XF86AudioPrev
+#    mpc prev
     #playerctl previous
 
 #Stop
-XF86AudioStop
-    mpc stop
+#XF86AudioStop
+#    mpc stop
     #playerctl stop
 
 #Brightness up
 XF86MonBrightnessUp
-    xbacklight -inc 10
+    xbacklight -inc 5
 #Brightness down
 XF86MonBrightnessDown
-    xbacklight -dec 10
+    xbacklight -dec 5
+
+#########################
+# BSPWM LAYOUT KEYS     #
+#########################
+
+#azerty keyboard layout for numbers 1-10
+#{ampersand,eacute,quotedbl,apostrophe,parenleft,section,egrave,exclam,ccedilla,agrave}
 
 #################################################################
 
@@ -324,11 +338,19 @@ XF86MonBrightnessDown
 super + {1-9,0}
 	bspc desktop -f '^{1-9,10}'
 
+#Focus selected desktop	FOR AZERTY KEYBOARDS
+#super + {ampersand,eacute,quotedbl,apostrophe,parenleft,section,egrave,exclam,ccedilla,agrave}
+#    bspc desktop -f '^{1-9,10}'
+
 #################################################################
 
 #Move window to selected desktop FOR QWERTY KEYBOARDS
 super + shift + {1-9,0}
     id=$(bspc query -N -n); bspc node -d ^{1-9,10}; bspc node -f ${id}}
+
+#Move window to selected desktop FOR AZERTY KEYBOARDS
+#super + shift + {ampersand,eacute,quotedbl,apostrophe,parenleft,section,egrave,exclam,ccedilla,agrave}
+#    id=$(bspc query -N -n); bspc node -d ^{1-9,10}; bspc node -f ${id}}
 
 #################################################################
 
