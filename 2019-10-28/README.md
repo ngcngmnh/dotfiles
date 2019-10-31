@@ -1,0 +1,4 @@
+bspwm
+sxhkd
+polybar
+dunst
