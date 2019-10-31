@@ -25,8 +25,9 @@ $HOME/.config/polybar/launch.sh &
 #feh --randomize --bg-fill ~/Dropbox/Apps/Desktoppr/*
 
 #xsetroot -cursor_name left_ptr &
+killall -q sxhkd
+while pgrep -u $UID -x sxhkd >/dev/null; do sleep 1; done
 sxhkd &
-
 #killall -q conky
 #conky -c $HOME/.config/bspwm/system-overview &
 #run variety &
@@ -37,10 +38,17 @@ sxhkd &
 #run xfce4-clipman &
 #numlockx on &
 #blueberry-tray &
-compton --config $HOME/.config/bspwm/compton.conf &
+compton --dbus --config $HOME/.config/bspwm/compton.conf &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-/usr/lib/xfce4/notifyd/xfce4-notifyd &
+#/usr/lib/xfce4/notifyd/xfce4-notifyd &
+killall -q dunst
+while pgrep -u $UID -x dunst >/dev/null; do sleep 1; done
+dunst &
 nitrogen --restore &
+xinput set-prop "ELAN1200:00 04F3:303E Touchpad" "libinput Tapping Enabled" 1 &
+killall -q redshift
+while pgrep -u $UID -x redshift >/dev/null; do sleep 1; done
+redshift -t 6500:3750 -b 1.0:0.9 -r -l 10.80:106.70 &
 #run caffeine &
 #run vivaldi-stable &
 #run firefox &
@@ -50,3 +58,14 @@ nitrogen --restore &
 #run discord &
 #run spotify &
 #run atom &
+
+
+#########
+touchpad_status=$(cat ~/.config/sxhkd/scripts/touchpad-status)
+if [ "$touchpad_status" == 'off' ]
+then
+     xinput disable "ELAN1200:00 04F3:303E Touchpad"
+else
+     xinput enable "ELAN1200:00 04F3:303E Touchpad"
+fi
+
